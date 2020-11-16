@@ -1,6 +1,7 @@
 import 'package:checklist/views/home/home_screen.dart';
 import 'package:checklist/views/navigation/navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppRoot extends StatefulWidget {
   @override
@@ -9,14 +10,23 @@ class AppRoot extends StatefulWidget {
 
 class _AppRootState extends State<AppRoot> {
 
-  final Image logo = Image.asset('images/respite_logo.jpg', fit: BoxFit.contain, height: 48,);
+  final Image logo = Image.asset('images/respite_logo_transparent.png', fit: BoxFit.contain, height: 48,);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: logo,
+        title: Row(
+          children: [
+            logo,
+            SizedBox(width: 8,),
+            Text('RESPITE', style: GoogleFonts.robotoSlab(
+                color: const Color.fromARGB(205, 212, 175, 55))
+            ),
+
+          ],
+        ),
         actions: <Widget>[
           popupMenuButton(),
         ],
