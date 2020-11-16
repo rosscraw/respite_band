@@ -10,10 +10,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  final Image weekends = Image.asset('images/weekends.png', fit: BoxFit.contain,);
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(widget.title),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+                'images/weekends.png'),
+            fit: BoxFit.contain,
+          ),
+        ),
+      ),
     );
   }
 }
