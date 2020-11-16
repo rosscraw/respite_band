@@ -1,4 +1,4 @@
-import 'file:///C:/Users/rossb/OneDrive/Documents/Flutter%20Projects/checklist/lib/views/home/home_screen.dart';
+
 import 'package:checklist/models/band_member.dart';
 import 'package:checklist/services/band_data.dart';
 import 'package:checklist/views/app_root.dart';
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     return Provider<List<BandMember>>.value(
       value: members,
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Respite Band',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
