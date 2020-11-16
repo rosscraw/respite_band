@@ -1,7 +1,7 @@
 import 'package:checklist/views/calendar/calendar_screen.dart';
 import 'package:checklist/views/figures/figures_screen.dart';
 import 'package:checklist/views/home/home_screen.dart';
-import 'package:checklist/views/list/list_screen.dart';
+import 'package:checklist/views/members/members_screen.dart';
 import 'package:flutter/material.dart';
 
 class NavigationBar extends StatefulWidget {
@@ -15,7 +15,7 @@ class _NavigationBarState extends State<NavigationBar> {
 
   final List<Widget> _navTabs = [
     HomeScreen(title: 'Home Screen', key: PageStorageKey('Home')),
-    ListScreen(title: 'List Screen', key: PageStorageKey('List')),
+    MembersScreen(title: 'Members Screen', key: PageStorageKey('Members')),
     FiguresScreen(title: 'Figures Screen', key: PageStorageKey('Figures')),
     CalendarScreen(title: 'Calendar Screen', key: PageStorageKey('Calendar'))
   ];
@@ -31,8 +31,8 @@ class _NavigationBarState extends State<NavigationBar> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey[800],
+        selectedItemColor: const Color.fromARGB(205, 212, 175, 55),
+        unselectedItemColor: Colors.grey[600],
         type: BottomNavigationBarType.fixed,
         onTap: onTabTapped,
         currentIndex:
@@ -43,8 +43,8 @@ class _NavigationBarState extends State<NavigationBar> {
             title: new Text('Home'),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.list),
-            title: new Text('List'),
+            icon: new Icon(Icons.group),
+            title: new Text('Members'),
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.show_chart), title: Text('Figures')),

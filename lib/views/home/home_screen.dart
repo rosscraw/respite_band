@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,17 +17,36 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
+    return Stack(
+      children: [
+        Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
                 'images/weekends.png'),
-            fit: BoxFit.contain,
+            fit: BoxFit.fitHeight,
           ),
         ),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
+          child: Container(color: Colors.black.withOpacity(0.1))
+        ),
       ),
+        Padding(
+          padding: EdgeInsets.all(16),
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    'images/weekends.png'),
+                fit: BoxFit.contain
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 }
