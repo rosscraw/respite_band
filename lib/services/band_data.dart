@@ -15,13 +15,13 @@ class BandData{
     final Instrument aerodyne = new Instrument(make: 'Fender', model: 'Aerodyne', type: 'Bass', image: Image.asset('images/members/ross/aerodyne.jpg'));
     ross.addInstrument(modelt);
     ross.addInstrument(aerodyne);
-    ross.instagram ='@rossbremcraw';
-    ross.twitter = '@rossbremcraw';
+    ross.instagram ='rossbremcraw';
+    ross.twitter = 'rossbremcraw';
 
     // SAM
     final BandMember sam = new BandMember(name: 'Samuel Nicholson', plays: 'Vocals', image: Image.asset('images/members/sam/sam.jpg'));
     //sam.twitter = '';
-    sam.instagram = '@callthatacarrot';
+    sam.instagram = 'callthatacarrot';
 
     // ANDREW
     final BandMember andrew = new BandMember(name: 'Andrew Vaughan', plays: 'Guitar', image: Image.asset('images/members/andrew/andrew.jpg'));
@@ -31,22 +31,22 @@ class BandData{
     andrew.addInstrument(charvel);
     andrew.addInstrument(prs);
     andrew.addInstrument(pawnshop);
-    andrew.instagram = '@findingandrew_';
-    andrew.twitter = '@findingandrew_';
+    andrew.instagram = 'findingandrew_';
+    andrew.twitter = 'findingandrew_';
 
     // EUAN
     final BandMember euan = new BandMember(name: 'Euan Macqueen', plays: 'Guitar', image: Image.asset('images/members/euan/euan.jpg'));
     final Instrument strat = new Instrument(make: 'Fender', model: 'American Performer Stratocaster HSS', type: 'Electric Guitar', image: Image.asset('images/members/euan/strat.jpeg'));
     final Instrument schecter = new Instrument(make: 'Schecter', model: '', type: 'Electric Guitar', image: Image.asset('images/members/andrew/prs.jpg'));
     euan.addInstrument(strat);
-    euan.twitter = '@euan_m108';
-    euan.instagram = '@euan_mac_';
+    euan.twitter = 'euan_m108';
+    euan.instagram = 'euan_mac_';
     //euan.addInstrument(schecter);
 
     //REISS
     final BandMember reiss = new BandMember(name: 'Reiss McLeod', plays: 'Drums', image: Image.asset('images/members/reiss/reiss.jpg'));
     //reiss.twitter = '';
-    reiss.instagram = '@reiss.mcleod';
+    reiss.instagram = 'reiss.mcleod';
 
     return [sam, andrew, euan, ross, reiss];
 

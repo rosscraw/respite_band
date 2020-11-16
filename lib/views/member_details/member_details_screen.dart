@@ -2,6 +2,8 @@ import 'package:checklist/models/band_member.dart';
 import 'package:checklist/models/instrument.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MemberDetailsScreen extends StatefulWidget {
   MemberDetailsScreen({Key key, this.member});
@@ -36,7 +38,7 @@ class _MemberDetailsScreenState extends State<MemberDetailsScreen> {
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
                   width: 200,
@@ -69,23 +71,42 @@ class _MemberDetailsScreenState extends State<MemberDetailsScreen> {
 
   Widget contactList(BandMember member) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+      //mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         member.twitter != null
-            ? Text("Twitter: " + member.twitter,
-                style: GoogleFonts.robotoSlab(
-                    color: const Color.fromARGB(205, 212, 175, 55)))
+            ? InkWell(
+                child: Row(
+                  children: [
+                    FaIcon(FontAwesomeIcons.twitter, color: const Color.fromARGB(205, 212, 175, 55),),
+                    Text(" @" + member.twitter,
+                        style: GoogleFonts.robotoSlab(
+                            color: const Color.fromARGB(205, 212, 175, 55),)),
+                  ],
+                ),
+                onTap: () =>
+                    launch('https://www.twitter.com/' + member.twitter),
+              )
             : SizedBox.shrink(),
         member.instagram != null
-            ? Text("Instagram: " + member.instagram,
-                style: GoogleFonts.robotoSlab(
-                    color: const Color.fromARGB(205, 212, 175, 55)))
+            ? InkWell(
+                child: Row(
+                  children: [
+                    FaIcon(FontAwesomeIcons.instagram,color: const Color.fromARGB(205, 212, 175, 55),),
+                    Text(" @" + member.instagram,
+                        style: GoogleFonts.robotoSlab(
+                            color: const Color.fromARGB(205, 212, 175, 55))),
+                  ],
+                ),
+                onTap: () =>
+                    launch('https://www.instagram.com/' + member.instagram),
+              )
             : SizedBox.shrink(),
         member.email != null
-            ? Text("Email: ",
+            ? Text("Email: @",
                 style: GoogleFonts.robotoSlab(
-                    color: const Color.fromARGB(205, 212, 175, 55)))
+                    color: const Color.fromARGB(205, 212, 175, 55),
+                    fontSize: 12))
             : SizedBox.shrink()
       ],
     );

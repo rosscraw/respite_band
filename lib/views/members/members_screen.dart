@@ -1,7 +1,6 @@
 import 'package:checklist/models/band_member.dart';
 import 'package:checklist/views/member_details/member_details_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:checklist/models/constants.dart' as Constant;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 class MembersScreen extends StatefulWidget {
