@@ -1,4 +1,4 @@
-import 'package:checklist/views/calendar/calendar_screen.dart';
+import 'package:checklist/views/contact/contact_screen.dart';
 import 'package:checklist/views/figures/figures_screen.dart';
 import 'package:checklist/views/home/home_screen.dart';
 import 'package:checklist/views/members/members_screen.dart';
@@ -17,7 +17,7 @@ class _NavigationBarState extends State<NavigationBar> {
     HomeScreen(title: 'Home Screen', key: PageStorageKey('Home')),
     MembersScreen(title: 'Members Screen', key: PageStorageKey('Members')),
     FiguresScreen(title: 'Figures Screen', key: PageStorageKey('Figures')),
-    CalendarScreen(title: 'Calendar Screen', key: PageStorageKey('Calendar'))
+    ContactScreen(title: 'Contact Screen', key: PageStorageKey('Contact'))
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();
@@ -49,7 +49,7 @@ class _NavigationBarState extends State<NavigationBar> {
           BottomNavigationBarItem(
               icon: Icon(Icons.show_chart), title: Text('Figures')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today), title: Text('Calendar')),
+              icon: Icon(Icons.mail), title: Text('Contact')),
         ],
       ),
     );
