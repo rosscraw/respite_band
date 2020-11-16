@@ -8,11 +8,15 @@ class AppRoot extends StatefulWidget {
 }
 
 class _AppRootState extends State<AppRoot> {
+
+  final Image logo = Image.asset('images/respite_logo.jpg', fit: BoxFit.contain, height: 48,);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("App Root"),
+        backgroundColor: Colors.black,
+        title: logo,
         actions: <Widget>[
           popupMenuButton(),
         ],

@@ -30,6 +30,9 @@ class _NavigationBarState extends State<NavigationBar> {
         bucket: bucket,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey[800],
         type: BottomNavigationBarType.fixed,
         onTap: onTabTapped,
         currentIndex:
