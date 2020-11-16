@@ -3,6 +3,7 @@ import 'package:checklist/views/member_details/member_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:checklist/models/constants.dart' as Constant;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 class MembersScreen extends StatefulWidget {
   MembersScreen({Key key, this.title}) : super(key: key);
 
@@ -15,13 +16,13 @@ class MembersScreen extends StatefulWidget {
 class _MembersScreenState extends State<MembersScreen> {
 
 
-  List<BandMember> bandMembers = [
-    Constant.sam,
-    Constant.andrew,
-    Constant.euan,
-    Constant.ross,
-    Constant.reiss
-  ];
+//  List<BandMember> bandMembers = [
+//    Constant.sam,
+//    Constant.andrew,
+//    Constant.euan,
+//    Constant.ross,
+//    Constant.reiss
+//  ];
 
 
 
@@ -38,11 +39,13 @@ class _MembersScreenState extends State<MembersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Constant.ross.addInstrument(Constant.modelt);
-    Constant.ross.addInstrument(Constant.aerodyne);
-    Constant.andrew.addInstrument(Constant.charvel);
-    Constant.andrew.addInstrument(Constant.prs);
-    Constant.andrew.addInstrument(Constant.pawnshop);
+//    Constant.ross.addInstrument(Constant.modelt);
+//    Constant.ross.addInstrument(Constant.aerodyne);
+//    Constant.andrew.addInstrument(Constant.charvel);
+//    Constant.andrew.addInstrument(Constant.prs);
+//    Constant.andrew.addInstrument(Constant.pawnshop);
+
+  final bandMembers = Provider.of<List<BandMember>>(context);
 
     return Scaffold(
       backgroundColor: Colors.grey[850],

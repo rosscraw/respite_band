@@ -8,8 +8,9 @@ class BandMember {
   final String name;
   final String plays;
   final Image image;
-  String twitter;
-  String instagram;
+  String _twitter;
+  String _instagram;
+  String _email;
   List<Instrument> instruments = [];
   List<String> _facts = [];
 
@@ -22,20 +23,30 @@ class BandMember {
     }
   }
 
+  String get twitter {
+    return _twitter;
+  }
+
+  set twitter(String twitter) {
+    _twitter = twitter;
+  }
+
+  String get instagram {
+    return _instagram;
+  }
+
+  set instagram(String instagram) {
+    _instagram = instagram;
+  }
+  String get email {
+    return _email;
+  }
+
+  set email(String email) {
+    _email = email;
+  }
+
+
 }
 
 
-BandMember ross = new BandMember(name: 'Ross Crawford', plays: 'Bass', image: Image.asset('images/members/ross/ross.jpg'));
-Instrument modelt = new Instrument(make: 'Schecter', model: 'Model-T', type: 'Bass');
-BandMember sam = new BandMember(name: 'Samuel Nicholson', plays: 'Vocals', image: Image.asset('images/members/sam/sam.jpg'));
-BandMember andrew = new BandMember(name: 'Andrew Vaughan', plays: 'Guitar', image: Image.asset('images/members/andrew/andrew.jpg'));
-BandMember euan = new BandMember(name: 'Euan Macqueen', plays: 'Guitar', image: Image.asset('images/members/euan/euan.jpg'));
-BandMember reiss = new BandMember(name: 'Reiss McLeod', plays: 'Drums', image: Image.asset('images/members/reiss/reiss.jpg'));
-
-List<BandMember> bandMembers = [
-  sam,
-  andrew,
-  euan,
-  ross,
-  reiss
-];

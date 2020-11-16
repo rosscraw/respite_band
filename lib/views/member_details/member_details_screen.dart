@@ -15,6 +15,7 @@ class MemberDetailsScreen extends StatefulWidget {
 class _MemberDetailsScreenState extends State<MemberDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    BandMember member = widget.member;
     return Scaffold(
       backgroundColor: Colors.grey[850],
       appBar: AppBar(
@@ -23,7 +24,7 @@ class _MemberDetailsScreenState extends State<MemberDetailsScreen> {
           color: const Color.fromARGB(205, 212, 175, 55),
         ),
         title: Text(
-          widget.member.name,
+          member.name,
           style: GoogleFonts.robotoSlab(
               color: const Color.fromARGB(205, 212, 175, 55)),
         ),
@@ -46,29 +47,47 @@ class _MemberDetailsScreenState extends State<MemberDetailsScreen> {
                       color: const Color.fromARGB(205, 212, 175, 55),
                     ),
                   ),
-                  child: widget.member.image,
+                  child: member.image,
                 ),
-                SizedBox(
-                  width: 8
-                ),
-                //TODO update so is a list of contact details
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Twitter", style: GoogleFonts.robotoSlab(color: const Color.fromARGB(205, 212, 175, 55)),),
-                    Text("Instagram", style: GoogleFonts.robotoSlab(color: const Color.fromARGB(205, 212, 175, 55)), ),
-                    Text("Email", style: GoogleFonts.robotoSlab(color: const Color.fromARGB(205, 212, 175, 55)),)
-                  ],
-                )
+                SizedBox(width: 8),
+                contactList(member),
               ],
             ),
             widget.member.instruments.isNotEmpty
                 ? instrumentList()
-                : Text('No Instruments:', style: GoogleFonts.robotoSlab(color: const Color.fromARGB(205, 212, 175, 55), fontSize: 20),),
+                : Text(
+                    'No Instruments:',
+                    style: GoogleFonts.robotoSlab(
+                        color: const Color.fromARGB(205, 212, 175, 55),
+                        fontSize: 20),
+                  ),
           ],
         ),
       )),
+    );
+  }
+
+  Widget contactList(BandMember member) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        member.twitter != null
+            ? Text("Twitter: " + member.twitter,
+                style: GoogleFonts.robotoSlab(
+                    color: const Color.fromARGB(205, 212, 175, 55)))
+            : SizedBox.shrink(),
+        member.instagram != null
+            ? Text("Instagram: " + member.instagram,
+                style: GoogleFonts.robotoSlab(
+                    color: const Color.fromARGB(205, 212, 175, 55)))
+            : SizedBox.shrink(),
+        member.email != null
+            ? Text("Email: ",
+                style: GoogleFonts.robotoSlab(
+                    color: const Color.fromARGB(205, 212, 175, 55)))
+            : SizedBox.shrink()
+      ],
     );
   }
 
@@ -84,7 +103,12 @@ class _MemberDetailsScreenState extends State<MemberDetailsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Instruments:', style: GoogleFonts.robotoSlab(color: const Color.fromARGB(205, 212, 175, 55), fontSize: 20),),
+              Text(
+                'Instruments:',
+                style: GoogleFonts.robotoSlab(
+                    color: const Color.fromARGB(205, 212, 175, 55),
+                    fontSize: 20),
+              ),
               ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -92,16 +116,18 @@ class _MemberDetailsScreenState extends State<MemberDetailsScreen> {
                   itemBuilder: (context, index) {
                     return Card(
                       child: ListTile(
-                        title: Text(instruments[index].make, style: GoogleFonts.robotoSlab(),),
-                        subtitle: Text(instruments[index].model, style: GoogleFonts.robotoSlab()),
+                        title: Text(
+                          instruments[index].make,
+                          style: GoogleFonts.robotoSlab(),
+                        ),
+                        subtitle: Text(instruments[index].model,
+                            style: GoogleFonts.robotoSlab()),
                         trailing: Container(
-                            width: 200,
-                            decoration: BoxDecoration(
+                          width: 200,
+                          decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: instruments[index].image.image,
-                                fit: BoxFit.contain
-                              )
-                            ),
+                                  image: instruments[index].image.image,
+                                  fit: BoxFit.contain)),
                         ),
                       ),
                     );
