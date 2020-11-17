@@ -1,8 +1,9 @@
 import 'package:checklist/views/contact/contact_screen.dart';
-import 'package:checklist/views/figures/figures_screen.dart';
+import 'package:checklist/views/music/music_screen.dart';
 import 'package:checklist/views/home/home_screen.dart';
 import 'package:checklist/views/members/members_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NavigationBar extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class _NavigationBarState extends State<NavigationBar> {
   final List<Widget> _navTabs = [
     HomeScreen(title: 'Home Screen', key: PageStorageKey('Home')),
     MembersScreen(title: 'Members Screen', key: PageStorageKey('Members')),
-    FiguresScreen(title: 'Figures Screen', key: PageStorageKey('Figures')),
+    MusicScreen(title: 'Music Screen', key: PageStorageKey('Music')),
     ContactScreen(title: 'Contact Screen', key: PageStorageKey('Contact'))
   ];
 
@@ -40,16 +41,16 @@ class _NavigationBarState extends State<NavigationBar> {
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.home),
-            title: new Text('Home'),
+            title: new Text('Home', style: GoogleFonts.robotoSlab(),),
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.group),
-            title: new Text('Members'),
+            title: new Text('Members', style: GoogleFonts.robotoSlab(),),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.show_chart), title: Text('Figures')),
+              icon: Icon(Icons.music_note), title: Text('Music', style: GoogleFonts.robotoSlab(),)),
           BottomNavigationBarItem(
-              icon: Icon(Icons.mail), title: Text('Contact')),
+              icon: Icon(Icons.mail), title: Text('Contact', style: GoogleFonts.robotoSlab(),)),
         ],
       ),
     );
