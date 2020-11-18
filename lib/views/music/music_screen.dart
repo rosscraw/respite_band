@@ -1,14 +1,15 @@
 import 'dart:convert';
 
+import 'package:checklist/services/spotify_fetch.dart';
 import 'package:checklist/views/custom_widgets/loading_spinner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
 import 'package:checklist/models/music.dart';
-import 'package:spotify/spotify.dart';
+import 'package:spotify/spotify.dart' as Spotify;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:async/async.dart';
-
+//import 'package:image/image.dart' as img;
 /// Music Screen that displays the artist's top songs from Spotify.
 ///
 /// Shows the track title, duration and popularity in a [Card].
@@ -23,21 +24,27 @@ class MusicScreen extends StatefulWidget {
 
 class _MusicScreenState extends State<MusicScreen> {
 
-  Future _future;
+  //Future _future;
+  String _artistId = '7LFdx7Ik3A9M6CDEnn4rfq';
+  SpotifyFetch _spotifyFetch = new SpotifyFetch(artistId: '7LFdx7Ik3A9M6CDEnn4rfq');
 
-  @override
-  void initState() {
-    _future = getArtist();
-    super.initState();
-  }
-  final AsyncMemoizer _memoizer = AsyncMemoizer();
-  List<Track> tracks = new List<Track>();
-  String _clientId = "ffed8f59b48443569b9bfc0cd092c86d";
-  String _clientSecret = "b3fd3cb17f19493fbb91f1656d27347b";
+
+//  @override
+//  void initState() {
+//    _future = getTopTracks();
+//    super.initState();
+//  }
+
+  //final AsyncMemoizer _memoizer = AsyncMemoizer();
+  List<Spotify.Track> tracks = new List<Spotify.Track>();
+//  String _clientId = "ffed8f59b48443569b9bfc0cd092c86d";
+//  String _clientSecret = "b3fd3cb17f19493fbb91f1656d27347b";
 
 
   @override
   Widget build(BuildContext context) {
+    //SpotifyFetch _spotifyFetch = new SpotifyFetch(artistId: _artistId);
+
     return Scaffold(
       backgroundColor: Colors.grey[850],
       body: SingleChildScrollView(
@@ -50,18 +57,19 @@ class _MusicScreenState extends State<MusicScreen> {
                 )),
           ),
           FutureBuilder(
-              future: _future,
+              future: _spotifyFetch.getTopTracks(),
               builder: (context, topTracks) {
                 // Shows loading spinner animation when waiting on response from API.
                 if (topTracks.connectionState == ConnectionState.waiting) {
                   return LoadingSpinner();
                 } else {
+                  tracks = topTracks.data;
                   return ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: tracks.length,
                       itemBuilder: (context, index) {
-                        return trackCard(index);//
+                        return trackCard(tracks[index], index);//
                       });
                 }
               })
@@ -70,24 +78,25 @@ class _MusicScreenState extends State<MusicScreen> {
     );
   }
 
-  /// Fetches top tracks using Spotify API.
-  Future getArtist()  {
-    return this._memoizer.runOnce(() async {
-      final SpotifyApiCredentials _credentials =
-      SpotifyApiCredentials(_clientId, _clientSecret);
-      final SpotifyApi _spotify = SpotifyApi(_credentials);
-      final _tracks =
-      await _spotify.artists.getTopTracks('7LFdx7Ik3A9M6CDEnn4rfq', 'GB');
-      print("CALL API");
-      return this.tracks = _tracks.toList();
-    });
-  }
+//  /// Fetches top tracks using Spotify API.
+//  Future getTopTracks() async {
+//    //return this._memoizer.runOnce(() async {
+//      final SpotifyApiCredentials _credentials =
+//      SpotifyApiCredentials(_clientId, _clientSecret);
+//      final SpotifyApi _spotify = SpotifyApi(_credentials);
+//      final _tracks =
+//      await _spotify.artists.getTopTracks('7LFdx7Ik3A9M6CDEnn4rfq', 'GB');
+//      print("CALL API");
+//      return this.tracks = _tracks.toList();
+//    //);
+//  }
 
   /// [Card] that displays details about a track.
   ///
   /// Displays track name, popularity and duration.
   /// TODO Get album art and link to song on Spotify.
-  Card trackCard(int index) {
+  Card trackCard(Spotify.Track track, int index) {
+    Future albumArt = _spotifyFetch.getAlbumArt(track);
     return Card(
       color: Colors.grey[900],
       //TODO album art shown in card
@@ -129,9 +138,25 @@ class _MusicScreenState extends State<MusicScreen> {
           ],
         ),
         //TODO album art shown in card
-        trailing: CircleAvatar(
-          backgroundImage: NetworkImage("https://scontent.fman1-1.fna.fbcdn.net/v/t31.0-8/25394805_2231281893552389_6299064154195032122_o.jpg?_nc_cat=103&ccb=2&_nc_sid=09cbfe&_nc_ohc=0QvqOn_Z2fwAX8ZRPdw&_nc_ht=scontent.fman1-1.fna&oh=607e4052d5eaebf5dc066375bf7c83f8&oe=5FDA253E"),
-        ) ,
+        trailing: FutureBuilder(
+            future: albumArt,
+          builder: (context, art) {
+            // Shows loading spinner animation when waiting on response from API.
+            if (art.connectionState == ConnectionState.waiting) {
+              return SizedBox();
+            } else {
+             var artImage = art.data;
+              return SizedBox(
+//                height: 30,
+//                width: 30,
+                child: Image.network(art.data.url)
+//                  decoration: BoxDecoration(
+//                  image: DecorationImage(
+//                    image: NetworkImage(art.data.url) //<--- .image added here
+              );}
+            }
+    )
+
       ),
     );
   }
