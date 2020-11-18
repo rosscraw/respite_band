@@ -35,10 +35,11 @@ class _MemberDetailsScreenState extends State<MemberDetailsScreen> {
           child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
                   width: 200,
@@ -57,12 +58,7 @@ class _MemberDetailsScreenState extends State<MemberDetailsScreen> {
             ),
             widget.member.instruments.isNotEmpty
                 ? instrumentList()
-                : Text(
-                    'No Instruments:',
-                    style: GoogleFonts.robotoSlab(
-                        color: const Color.fromARGB(205, 212, 175, 55),
-                        fontSize: 20),
-                  ),
+                : SizedBox(),
           ],
         ),
       )),
@@ -71,9 +67,11 @@ class _MemberDetailsScreenState extends State<MemberDetailsScreen> {
 
   Widget contactList(BandMember member) {
     return Column(
-      //mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        Text(member.nickname, style: GoogleFonts.robotoSlab(
+      color: const Color.fromARGB(205, 212, 175, 55), fontSize: 20)),
         member.twitter != null
             ? InkWell(
                 child: Row(
@@ -112,6 +110,8 @@ class _MemberDetailsScreenState extends State<MemberDetailsScreen> {
     );
   }
 
+
+  /// List of a [BandMember]'s [Instrument]s.
   Widget instrumentList() {
     List<Instrument> instruments = widget.member.instruments;
 
