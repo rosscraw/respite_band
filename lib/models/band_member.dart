@@ -1,6 +1,9 @@
-import 'package:checklist/models/instrument.dart';
+import 'file:///C:/Users/rossb/OneDrive/Documents/Flutter%20Projects/respite_band/lib/models/gear/instrument.dart';
 import 'package:flutter/material.dart';
 
+/// A member of the band.
+///
+/// A Band Member will be used to
 class BandMember {
 
   BandMember({Key key, this.name, this.plays, this.image});
@@ -14,6 +17,7 @@ class BandMember {
   List<Instrument> instruments = [];
   List<String> _facts = [];
 
+  /// Adds an [Instrument] to the band member's list.
   void addInstrument(Instrument instrument) {
     if(instruments.contains(instrument)) {
 
