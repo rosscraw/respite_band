@@ -26,9 +26,13 @@ class _NavigationBarState extends State<NavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageStorage(
-        child: _navTabs[_currentIndex],
-        bucket: bucket,
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _navTabs,
+//        child: PageStorage(
+//          child: _navTabs[_currentIndex],
+//          bucket: bucket,
+//        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
