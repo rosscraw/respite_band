@@ -1,5 +1,6 @@
 import 'file:///C:/Users/rossb/OneDrive/Documents/Flutter%20Projects/respite_band/lib/models/gear/instrument.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 /// A member of the band.
 ///
@@ -11,6 +12,16 @@ class BandMember {
   final String name;
   final String plays;
   final Image image;
+  String _nickname;
+  FaIcon _instrumentIcon;
+
+  FaIcon get instrumentIcon => _instrumentIcon;
+
+  set instrumentIcon(FaIcon instrumentIcon) {
+    _instrumentIcon = instrumentIcon;
+  }
+
+
   String _twitter;
   String _instagram;
   String _email;
@@ -25,6 +36,12 @@ class BandMember {
     else {
       instruments.add(instrument);
     }
+  }
+
+  String get nickname => _nickname;
+
+  set nickname(String nickname) {
+    _nickname = nickname;
   }
 
   String get twitter {

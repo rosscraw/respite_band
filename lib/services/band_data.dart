@@ -17,11 +17,15 @@ class BandData{
     ross.addInstrument(aerodyne);
     ross.instagram ='rossbremcraw';
     ross.twitter = 'rossbremcraw';
+    ross.nickname = 'Bass Master Elite';
 
     // SAM
     final BandMember sam = new BandMember(name: 'Samuel Nicholson', plays: 'Vocals', image: Image.asset('images/members/sam/sam.jpg'));
+    final Instrument mic = new Instrument(make: 'Microphone', model: 'Shouty Stick', type: 'Microphone', image: Image.asset('images/members/sam/mic.jpg'));
+    sam.addInstrument(mic);
     //sam.twitter = '';
     sam.instagram = 'callthatacarrot';
+    sam.nickname = 'Sambo';
 
     // ANDREW
     final BandMember andrew = new BandMember(name: 'Andrew Vaughan', plays: 'Guitar', image: Image.asset('images/members/andrew/andrew.jpg'));
@@ -33,6 +37,7 @@ class BandData{
     andrew.addInstrument(pawnshop);
     andrew.instagram = 'findingandrew_';
     andrew.twitter = 'findingandrew_';
+    andrew.nickname = 'Banandrew';
 
     // EUAN
     final BandMember euan = new BandMember(name: 'Euan Macqueen', plays: 'Guitar', image: Image.asset('images/members/euan/euan.jpg'));
@@ -41,12 +46,16 @@ class BandData{
     euan.addInstrument(strat);
     euan.twitter = 'euan_m108';
     euan.instagram = 'euan_mac_';
+    euan.nickname = 'Eubo';
     //euan.addInstrument(schecter);
 
     //REISS
     final BandMember reiss = new BandMember(name: 'Reiss McLeod', plays: 'Drums', image: Image.asset('images/members/reiss/reiss.jpg'));
+    final Instrument mapex = new Instrument(make: 'Mapex', model: 'Tornado III', type: 'Drums', image: Image.asset('images/members/reiss/mapex.jpg'));
+    reiss.addInstrument(mapex);
     //reiss.twitter = '';
     reiss.instagram = 'reiss.mcleod';
+    reiss.nickname = 'Creiss';
 
     return [sam, andrew, euan, ross, reiss];
 
