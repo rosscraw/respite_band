@@ -1,4 +1,4 @@
-import 'package:checklist/models/instrument.dart';
+import 'file:///C:/Users/rossb/OneDrive/Documents/Flutter%20Projects/respite_band/lib/models/gear/instrument.dart';
 import 'package:flutter/material.dart';
 import 'package:checklist/models/band_member.dart';
 

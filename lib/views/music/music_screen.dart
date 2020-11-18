@@ -10,7 +10,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:async/async.dart';
 
 /// Music Screen that displays the artist's top songs from Spotify.
-/// Shows the track title, duration and popularity.
+///
+/// Shows the track title, duration and popularity in a [Card].
 class MusicScreen extends StatefulWidget {
   MusicScreen({Key key, this.title}) : super(key: key);
 
@@ -21,19 +22,16 @@ class MusicScreen extends StatefulWidget {
 }
 
 class _MusicScreenState extends State<MusicScreen> {
-  Future future;
+
+  Future _future;
+
   @override
   void initState() {
-    future = getArtist();
+    _future = getArtist();
     super.initState();
   }
-
-
-
   final AsyncMemoizer _memoizer = AsyncMemoizer();
-
   List<Track> tracks = new List<Track>();
-
   String _clientId = "ffed8f59b48443569b9bfc0cd092c86d";
   String _clientSecret = "b3fd3cb17f19493fbb91f1656d27347b";
 
@@ -52,8 +50,9 @@ class _MusicScreenState extends State<MusicScreen> {
                 )),
           ),
           FutureBuilder(
-              future: future,
+              future: _future,
               builder: (context, topTracks) {
+                // Shows loading spinner animation when waiting on response from API.
                 if (topTracks.connectionState == ConnectionState.waiting) {
                   return LoadingSpinner();
                 } else {
@@ -85,6 +84,7 @@ class _MusicScreenState extends State<MusicScreen> {
   }
 
   /// [Card] that displays details about a track.
+  ///
   /// Displays track name, popularity and duration.
   /// TODO Get album art and link to song on Spotify.
   Card trackCard(int index) {
