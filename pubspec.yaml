@@ -32,6 +32,7 @@ dependencies:
 #  http:
   flutter_rating_bar: ^3.0.0
   flutter_spinkit: ^4.1.2+1
+  #audio_manager: ^0.6.1
 
 
 dev_dependencies:

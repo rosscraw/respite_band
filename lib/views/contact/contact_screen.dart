@@ -19,9 +19,11 @@ class _ContactScreenState extends State<ContactScreen> {
       backgroundColor: Colors.grey[850],
     body: SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            Text('Contacts and Social Media', style: GoogleFonts.robotoSlab(
+            color: const Color.fromARGB(205, 212, 175, 55), fontSize: 20)),
             InkWell(
               child: Row(
                 children: [

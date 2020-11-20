@@ -1,5 +1,6 @@
 import 'package:checklist/views/home/home_screen.dart';
 import 'package:checklist/views/navigation/navigation_bar.dart';
+import 'package:checklist/views/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,8 +40,9 @@ class _AppRootState extends State<AppRoot> {
   /// Allows user to access settings and Log out of application.
   PopupMenuButton popupMenuButton() {
     return PopupMenuButton<String>(
+      onSelected: onClick,
       itemBuilder: (BuildContext context) {
-        return {'Settings', 'Logout'}.map((String choice) {
+        return {'Settings', 'About', 'Secret Button'}.map((String choice) {
           return PopupMenuItem<String>(
             value: choice,
             child: Text(choice),
@@ -48,6 +50,25 @@ class _AppRootState extends State<AppRoot> {
         }).toList();
       },
     );
+  }
+
+  /// This handles the Pop Up Menu's options and selection.
+  void onClick(String value) async {
+    switch (value) {
+      case 'Settings':
+        navigateToSettings();
+    }
+  }
+
+  /// Pushes settings screen to top of stack.
+  void navigateToSettings() {
+    Navigator.push(
+        context,
+        new MaterialPageRoute(
+            builder: (context) => SettingsScreen(title: 'Settings')))
+        .then((value) {
+      setState(() {});
+    });
   }
 
 

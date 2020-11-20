@@ -48,32 +48,35 @@ class _MusicScreenState extends State<MusicScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[850],
       body: SingleChildScrollView(
-        child: Container(
-            child: Column(children: <Widget>[
-          Center(
-            child: Text('Respite Top Spotify Tracks',
-                style: GoogleFonts.robotoSlab(
-                  color: const Color.fromARGB(205, 212, 175, 55), fontSize: 20,
-                )),
-          ),
-          FutureBuilder(
-              future: _spotifyFetch.getTopTracks(),
-              builder: (context, topTracks) {
-                // Shows loading spinner animation when waiting on response from API.
-                if (topTracks.connectionState == ConnectionState.waiting) {
-                  return LoadingSpinner();
-                } else {
-                  tracks = topTracks.data;
-                  return ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: tracks.length,
-                      itemBuilder: (context, index) {
-                        return trackCard(tracks[index], index);//
-                      });
-                }
-              })
-        ])),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+              child: Column(children: <Widget>[
+            Center(
+              child: Text('Respite Top Spotify Tracks',
+                  style: GoogleFonts.robotoSlab(
+                    color: const Color.fromARGB(205, 212, 175, 55), fontSize: 20,
+                  )),
+            ),
+            FutureBuilder(
+                future: _spotifyFetch.getTopTracks(),
+                builder: (context, topTracks) {
+                  // Shows loading spinner animation when waiting on response from API.
+                  if (topTracks.connectionState == ConnectionState.waiting) {
+                    return LoadingSpinner();
+                  } else {
+                    tracks = topTracks.data;
+                    return ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: tracks.length,
+                        itemBuilder: (context, index) {
+                          return trackCard(tracks[index], index);//
+                        });
+                  }
+                })
+          ])),
+        ),
       ),
     );
   }
@@ -91,72 +94,164 @@ class _MusicScreenState extends State<MusicScreen> {
 //    //);
 //  }
 
+//  /// [Card] that displays details about a track.
+//  ///
+//  /// Displays track name, popularity and duration.
+//  /// TODO Get album art and link to song on Spotify.
+//  Container trackCard(Spotify.Track track, int index) {
+//    Future albumArt = _spotifyFetch.getAlbumArt(track);
+//    return Container(
+//      height: 100,
+//      child: Card(
+//        color: Colors.grey[900],
+//        //TODO album art shown in card
+//        child: ListTile(
+//          //TODO link to play on spotify
+//          leading: Icon(Icons.play_circle_outline, color: const Color.fromARGB(205, 212, 175, 55),),
+//          title: Text(
+//            tracks[index].name,
+//            style: GoogleFonts.robotoSlab(
+//              color: const Color.fromARGB(205, 212, 175, 55),
+//            ),
+//          ),
+//          subtitle: Row(
+//            children: [
+//              Text(tracks[index].duration.inMinutes.toString() + ":" + (tracks[index].duration.inSeconds % 60).toString() ,
+//                  style: GoogleFonts.robotoSlab(
+//                    color:
+//                    const Color.fromARGB(205, 212, 175, 55),
+//                  )),
+//              SizedBox(
+//                width: 8,
+//              ),
+//              Text("Popularity: ", style: GoogleFonts.robotoSlab(
+//                color:
+//                const Color.fromARGB(205, 212, 175, 55),
+//              )),
+//              SizedBox(
+//                width: 8,
+//              ),
+//              RatingBar(
+//                initialRating: tracks[index].popularity.toDouble(),
+//                itemCount: 5,
+//                itemBuilder: (context, _) => Icon(
+//                  Icons.music_note,
+//                  color: const Color.fromARGB(205, 212, 175, 55),
+//                ),
+//                itemSize: 16,
+//              )
+//            ],
+//          ),
+//          //TODO album art shown in card
+//          trailing: FutureBuilder(
+//              future: albumArt,
+//            builder: (context, art) {
+//              // Shows loading spinner animation when waiting on response from API.
+//              if (art.connectionState == ConnectionState.waiting) {
+//                return SizedBox();
+//              } else {
+//               var artImage = art.data;
+//                return SizedBox(
+////                height: 30,
+////                width: 30,
+//                  child: Image.network(art.data.url)
+////                  decoration: BoxDecoration(
+////                  image: DecorationImage(
+////                    image: NetworkImage(art.data.url) //<--- .image added here
+//                );}
+//              }
+//      )
+//
+//        ),
+//      ),
+//    );
+//  }
+
   /// [Card] that displays details about a track.
   ///
   /// Displays track name, popularity and duration.
   /// TODO Get album art and link to song on Spotify.
-  Card trackCard(Spotify.Track track, int index) {
+  Container trackCard(Spotify.Track track, int index) {
     Future albumArt = _spotifyFetch.getAlbumArt(track);
-    return Card(
-      color: Colors.grey[900],
-      //TODO album art shown in card
-      child: ListTile(
-        //TODO link to play on spotify
-        leading: Icon(Icons.play_circle_outline, color: const Color.fromARGB(205, 212, 175, 55),),
-        title: Text(
-          tracks[index].name,
-          style: GoogleFonts.robotoSlab(
-            color: const Color.fromARGB(205, 212, 175, 55),
-          ),
-        ),
-        subtitle: Row(
-          children: [
-            Text(tracks[index].duration.inMinutes.toString() + ":" + (tracks[index].duration.inSeconds % 60).toString() ,
-                style: GoogleFonts.robotoSlab(
-                  color:
-                  const Color.fromARGB(205, 212, 175, 55),
-                )),
-            SizedBox(
-              width: 8,
-            ),
-            Text("Popularity: ", style: GoogleFonts.robotoSlab(
-              color:
-              const Color.fromARGB(205, 212, 175, 55),
-            )),
-            SizedBox(
-              width: 8,
-            ),
-            RatingBar(
-              initialRating: tracks[index].popularity.toDouble(),
-              itemCount: 5,
-              itemBuilder: (context, _) => Icon(
-                Icons.music_note,
-                color: const Color.fromARGB(205, 212, 175, 55),
-              ),
-              itemSize: 16,
-            )
-          ],
-        ),
+    return Container(
+      height: 100,
+      child: Card(
+        color: Colors.grey[900],
         //TODO album art shown in card
-        trailing: FutureBuilder(
-            future: albumArt,
-          builder: (context, art) {
-            // Shows loading spinner animation when waiting on response from API.
-            if (art.connectionState == ConnectionState.waiting) {
-              return SizedBox();
-            } else {
-             var artImage = art.data;
-              return SizedBox(
-//                height: 30,
-//                width: 30,
-                child: Image.network(art.data.url)
-//                  decoration: BoxDecoration(
-//                  image: DecorationImage(
-//                    image: NetworkImage(art.data.url) //<--- .image added here
-              );}
-            }
-    )
+        child: Row(
+          children: <Widget>[
+            // Album's picture.
+            SizedBox(
+                child: FutureBuilder(
+                    future: albumArt,
+                    builder: (context, art) {
+                      // Shows loading spinner animation when waiting on response from API.
+                      if (art.connectionState == ConnectionState.waiting) {
+                        return SizedBox();
+                      } else {
+                        return SizedBox(
+                            child: Image.network(art.data.url)
+                        );}                    }
+                )
+            ),
+            SizedBox(
+              width: 16,
+            ),
+            // Column of member's name and role in band.
+            Expanded(
+              flex: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  // Track title.
+                  Text(
+                    tracks[index].name,
+                    style: GoogleFonts.robotoSlab(
+                      color: const Color.fromARGB(205, 212, 175, 55), fontSize: 18,
+                    ),
+                  ),
+                  // Track duration and popularity rating.
+                  Row(
+                    children: [
+                      Text(tracks[index].duration.inMinutes.toString() + ":" + (tracks[index].duration.inSeconds % 60).toString() ,
+                          style: GoogleFonts.robotoSlab(
+                            color:
+                            const Color.fromARGB(205, 212, 175, 55), fontSize: 15
+                          )),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text("Popularity: ", style: GoogleFonts.robotoSlab(
+                        color:
+                        const Color.fromARGB(205, 212, 175, 55), fontSize: 15
+                      )),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      RatingBar(
+                        initialRating: tracks[index].popularity.toDouble(),
+                        itemCount: 5,
+                        itemBuilder: (context, _) => Icon(
+                          Icons.music_note,
+                          color: const Color.fromARGB(205, 212, 175, 55),
+                          size: 15,
+                        ),
+                        itemSize: 16,
+                      )
+                    ],
+                  ),],
+              ),
+            ),
+            // More info button.
+            // TODO link to song, whether direct to spotify or in app preview.
+            Expanded(
+              flex: 1,
+              child: Icon(Icons.play_circle_outline, color: const Color.fromARGB(205, 212, 175, 55),),
 
+            ),
+          ],
+        )
       ),
     );
   }
