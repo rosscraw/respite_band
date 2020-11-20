@@ -59,8 +59,6 @@ flutter:
     - images/members/sam/
     - images/members/euan/
     - images/members/reiss/
-
-
   uses-material-design: true
 
 

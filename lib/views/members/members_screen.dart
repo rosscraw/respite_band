@@ -18,70 +18,35 @@ class MembersScreen extends StatefulWidget {
 }
 
 class _MembersScreenState extends State<MembersScreen> {
-
   @override
   Widget build(BuildContext context) {
-
-  final bandMembers = Provider.of<List<BandMember>>(context);
+    final bandMembers = Provider.of<List<BandMember>>(context);
 
     return Scaffold(
       backgroundColor: Colors.grey[850],
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              children: [
-                Text('Oi oi, meet the bois!!!', style: GoogleFonts.robotoSlab(color: const Color.fromARGB(205, 212, 175, 55), fontSize: 20)),
-                ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: bandMembers.length,
-                    itemBuilder: (context, index) {
-                      return memberCard(index, bandMembers);
-                    }
-                ),
-              ],
-            )
-          ),
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                children: [
+                  Text('Oi oi, meet the bois!!!',
+                      style: GoogleFonts.robotoSlab(
+                          color: const Color.fromARGB(205, 212, 175, 55),
+                          fontSize: 20)),
+                  ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: bandMembers.length,
+                      itemBuilder: (context, index) {
+                        return memberCard(index, bandMembers);
+                      }),
+                ],
+              )),
         ),
       ),
     );
   }
-
-//  /// This produces a [Card] which displays information about a [BandMember].
-//  /// Can access [MemberDetailsScreen] for specific member by selecting the trailing [FlatButton].
-//  Container memberCard(int index, List<BandMember> bandMembers) {
-//    return Container(
-//      height: 100,
-//      child: Card(
-//          clipBehavior: Clip.antiAliasWithSaveLayer,
-//          margin: EdgeInsets.all(8),
-//          color: Colors.grey[900],
-//          child: ListTile(
-//            //TODO update to circle icon of member
-//            leading: SizedBox(
-//              child: bandMembers[index].image
-//            ),
-//            //TODO Style
-//            title: Text(bandMembers[index].name, style: GoogleFonts.robotoSlab(color: const Color.fromARGB(205, 212, 175, 55),)),
-//            //TODO Style
-//            subtitle: Text(bandMembers[index].plays, style: GoogleFonts.robotoSlab(color: const Color.fromARGB(205, 212, 175, 55),)),
-//            //TODO take to separate page
-//            trailing: FlatButton.icon(
-//              icon: Icon(Icons.info_outline, color: const Color.fromARGB(205, 212, 175, 55),
-//              ),
-//              label: Text('info', style: GoogleFonts.robotoSlab(color: const Color.fromARGB(205, 212, 175, 55),)),
-//              //TODO Navigate to band member details page
-//              onPressed: () {
-//                navigateToMemberDetails(bandMembers[index]);
-//              },
-//            ),
-//
-//          )
-//      ),
-//    );
-//  }
 
   /// This produces a [Card] which displays information about a [BandMember].
   /// Can access [MemberDetailsScreen] for specific member by selecting the trailing [FlatButton].
@@ -94,11 +59,9 @@ class _MembersScreenState extends State<MembersScreen> {
           child: Row(
             children: <Widget>[
               // Member's picture.
+              SizedBox(child: bandMembers[index].image),
               SizedBox(
-                  child: bandMembers[index].image
-              ),
-                SizedBox(
-                  width: 16,
+                width: 16,
               ),
               // Column of member's name and role in band.
               Expanded(
@@ -107,8 +70,14 @@ class _MembersScreenState extends State<MembersScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(bandMembers[index].name, style: GoogleFonts.robotoSlab(color: const Color.fromARGB(205, 212, 175, 55), fontSize: 18)),
-                    Text(bandMembers[index].plays, style: GoogleFonts.robotoSlab(color: const Color.fromARGB(205, 212, 175, 55), fontSize: 15)),
+                    Text(bandMembers[index].name,
+                        style: GoogleFonts.robotoSlab(
+                            color: const Color.fromARGB(205, 212, 175, 55),
+                            fontSize: 18)),
+                    Text(bandMembers[index].plays,
+                        style: GoogleFonts.robotoSlab(
+                            color: const Color.fromARGB(205, 212, 175, 55),
+                            fontSize: 15)),
                   ],
                 ),
               ),
@@ -116,28 +85,32 @@ class _MembersScreenState extends State<MembersScreen> {
               Expanded(
                 flex: 1,
                 child: FlatButton.icon(
-                  icon: Icon(Icons.info_outline, color: const Color.fromARGB(205, 212, 175, 55),
+                  icon: Icon(
+                    Icons.info_outline,
+                    color: const Color.fromARGB(205, 212, 175, 55),
                   ),
-                  label: Text('info', style: GoogleFonts.robotoSlab(color: const Color.fromARGB(205, 212, 175, 55),)),
+                  label: Text('info',
+                      style: GoogleFonts.robotoSlab(
+                        color: const Color.fromARGB(205, 212, 175, 55),
+                      )),
                   onPressed: () {
                     navigateToMemberDetails(bandMembers[index]);
                   },
                 ),
               ),
             ],
-          )
-      ),
+          )),
     );
   }
-
-
 
   void navigateToMemberDetails(BandMember member) {
     // TODO Firestore Integration
     Navigator.push(
         context,
         new MaterialPageRoute(
-            builder: (context) => MemberDetailsScreen(member: member,))).then((value) {
+            builder: (context) => MemberDetailsScreen(
+                  member: member,
+                ))).then((value) {
       setState(() {});
     });
   }
