@@ -1,4 +1,4 @@
-import 'package:checklist/views/home/home_screen.dart';
+
 import 'package:checklist/views/navigation/navigation_bar.dart';
 import 'package:checklist/views/settings/settings.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,6 @@ class _AppRootState extends State<AppRoot> {
             Text('RESPITE', style: GoogleFonts.robotoSlab(
                 color: const Color.fromARGB(205, 212, 175, 55))
             ),
-
           ],
         ),
         actions: <Widget>[
